@@ -6,10 +6,12 @@ using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 
 namespace Ow.EntityFrameworkCore
 {
     [DependsOn(typeof(OwDomainModule),
+        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
         typeof(AbpIdentityDomainModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpEntityFrameworkCoreModule))]
