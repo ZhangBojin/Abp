@@ -3,11 +3,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Ow.Domain;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.Identity;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
 namespace Ow.EntityFrameworkCore
 {
     [DependsOn(typeof(OwDomainModule),
+        typeof(AbpIdentityDomainModule),
+        typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpEntityFrameworkCoreModule))]
     public class OwEfCoreModule:AbpModule
     {
