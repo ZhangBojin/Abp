@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Ow.Domain.Entities;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity;
@@ -15,6 +14,7 @@ namespace Ow.EntityFrameworkCore
     public class OwDbContext:AbpDbContext<OwDbContext>
     {
         public DbSet<IdentityUser> Users { get; set; }
+        public DbSet<IdentityRole> Roles { get; set; }
 
         public OwDbContext(DbContextOptions<OwDbContext> options) : base(options)
         {
