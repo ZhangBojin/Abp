@@ -5,13 +5,9 @@ using OpenIddict.Validation.AspNetCore;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
 using Volo.Abp;
-using Volo.Abp.Account;
-using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.Autofac;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.AspNetCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
@@ -19,10 +15,6 @@ using Volo.Abp.Swashbuckle;
 namespace WebApplication1
 {
     [DependsOn(typeof(AbpAspNetCoreMvcModule),
-        typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
-        typeof(AbpIdentityAspNetCoreModule),
-        typeof(AbpIdentityHttpApiModule),
-        typeof(AbpAccountHttpApiModule),
         typeof(AbpSwashbuckleModule),
         typeof(AbpAutofacModule),
         typeof(OwApplicationModule),
