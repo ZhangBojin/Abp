@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace Ow.EntityFrameworkCore
 {
@@ -20,12 +17,6 @@ namespace Ow.EntityFrameworkCore
     {
         public DbSet<IdentityUser> Users { get; set; }
         public DbSet<IdentityRole> Roles { get; set; }
-        public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-        public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-        public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-        public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-        public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
-        public DbSet<IdentitySession> Sessions { get; set; }
 
         public OwDbContext(DbContextOptions<OwDbContext> options) : base(options)
         {
@@ -36,12 +27,12 @@ namespace Ow.EntityFrameworkCore
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ConfigurePermissionManagement();//配置权限管理模块
-            modelBuilder.ConfigureSettingManagement();//配置设置管理模块。
+            //modelBuilder.ConfigureSettingManagement();//配置设置管理模块。
             //modelBuilder.ConfigureBackgroundJobs();//配置后台作业管理模块。
             //modelBuilder.ConfigureAuditLogging();//配置审计日志管理模块
-            modelBuilder.ConfigureFeatureManagement();// 配置功能管理模块。
+            //modelBuilder.ConfigureFeatureManagement();// 配置功能管理模块。
             modelBuilder.ConfigureIdentity();//配置身份管理模块。
-            modelBuilder.ConfigureOpenIddict();//配置 OpenIddict 模块。
+            //modelBuilder.ConfigureOpenIddict();//配置 OpenIddict 模块。
             //modelBuilder.ConfigureTenantManagement();//配置租户管理模块。
             //modelBuilder.ConfigureBlobStoring();//配置 Blob 存储模块。
 
