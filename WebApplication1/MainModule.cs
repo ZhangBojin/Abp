@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OpenIddict.Validation.AspNetCore;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
-using System.Text;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +34,7 @@ namespace WebApplication1
         {
             base.ConfigureServices(context);
 
+            //ConfigureAuthentication(context);
             context.Services.AddControllers();
             context.Services.AddEndpointsApiExplorer();
             context.Services.AddAbpSwaggerGen(opt =>
@@ -56,8 +55,6 @@ namespace WebApplication1
             {
                 opt.ConventionalControllers.Create(typeof(OwApplicationModule).Assembly);
             });
-
-
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -77,6 +74,15 @@ namespace WebApplication1
 
         }
 
+        //private static void ConfigureAuthentication(ServiceConfigurationContext context)
+        //{
+        //    context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults
+        //        .AuthenticationScheme);
+        //    context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        //    {
+        //        options.IsDynamicClaimsEnabled = true;
+        //    });
+        //}
     }
 }
 
