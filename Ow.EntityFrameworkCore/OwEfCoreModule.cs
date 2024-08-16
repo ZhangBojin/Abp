@@ -25,7 +25,7 @@ namespace Ow.EntityFrameworkCore
 
             }); //配置注入
             Configure<AbpDbContextOptions>(options => {
-                options.UseSqlServer(); //选择使用mysql数据库
+                options.UseSqlServer(); //选择使用SqlServer数据库
             });
         }
     }

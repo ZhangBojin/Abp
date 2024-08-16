@@ -7,17 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dto\**" />
+    <EmbeddedResource Remove="Dto\**" />
+    <None Remove="Dto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.2.1" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="8.2.1" />
     <PackageReference Include="Volo.Abp.Identity.Application.Contracts" Version="8.2.1" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Application.Contracts" Version="8.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Ow.Domain.Share\Ow.Domain.Share.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dto\" />
   </ItemGroup>
 
 </Project>
