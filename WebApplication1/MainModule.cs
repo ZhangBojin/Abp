@@ -5,6 +5,7 @@ using OpenIddict.Validation.AspNetCore;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
 using Volo.Abp;
+using Volo.Abp.Account;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.Autofac;
@@ -15,6 +16,7 @@ using Volo.Abp.Swashbuckle;
 namespace WebApplication1
 {
     [DependsOn(typeof(AbpAspNetCoreMvcModule),
+        typeof(AbpAccountHttpApiModule),
         typeof(AbpSwashbuckleModule),
         typeof(AbpAutofacModule),
         typeof(OwApplicationModule),

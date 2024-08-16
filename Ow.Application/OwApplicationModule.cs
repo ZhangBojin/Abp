@@ -1,5 +1,6 @@
 ﻿using Ow.Application.Contracts;
 using Ow.Domain;
+using Volo.Abp.Account;
 using Volo.Abp.Application;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
@@ -8,6 +9,7 @@ using Volo.Abp.PermissionManagement;
 namespace Ow.Application
 {
     [DependsOn(typeof(AbpDddApplicationModule),
+        typeof(AbpAccountApplicationModule),
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpIdentityApplicationModule),
         typeof(OwApplicationContractsModule),
