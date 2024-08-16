@@ -26,7 +26,7 @@ namespace WebApplication1
         {
             base.ConfigureServices(context);
 
-            ConfigureAuthentication(context);
+            //ConfigureAuthentication(context);
             context.Services.AddControllers();
             context.Services.AddEndpointsApiExplorer();
             context.Services.AddAbpSwaggerGen(opt =>
@@ -66,15 +66,15 @@ namespace WebApplication1
 
         }
 
-        private static void ConfigureAuthentication(ServiceConfigurationContext context)
-        {
-            context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults
-                .AuthenticationScheme);
-            context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
-            {
-                options.IsDynamicClaimsEnabled = true;
-            });
-        }
+        //private static void ConfigureAuthentication(ServiceConfigurationContext context)
+        //{
+        //    context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults
+        //        .AuthenticationScheme);
+        //    context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
+        //    {
+        //        options.IsDynamicClaimsEnabled = true;
+        //    });
+        //}
     }
 }
 
