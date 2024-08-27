@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
-using OpenIddict.Validation.AspNetCore;
+﻿using Microsoft.OpenApi.Models;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
 using Volo.Abp;
@@ -11,7 +8,6 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
-using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
 
 namespace WebApplication1
@@ -20,7 +16,7 @@ namespace WebApplication1
         typeof(AbpAccountWebModule),
         typeof(AbpAccountHttpApiModule),
         typeof(AbpSwashbuckleModule),
-        typeof(AbpAutofacModule),
+        typeof(AbpAutofacModule),                                                  
         typeof(OwApplicationModule),
         typeof(OwEfCoreModule))]
     public class MainModule : AbpModule

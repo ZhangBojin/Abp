@@ -15,8 +15,6 @@ namespace Ow.EntityFrameworkCore
     [ConnectionStringName("Default")]
     public class OwDbContext:AbpDbContext<OwDbContext>
     {
-        public DbSet<IdentityUser> Users { get; set; }
-        public DbSet<IdentityRole> Roles { get; set; }
 
         public OwDbContext(DbContextOptions<OwDbContext> options) : base(options)
         {
