@@ -16,8 +16,4 @@
     <ProjectReference Include="..\Ow.Domain.Share\Ow.Domain.Share.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
 </Project>

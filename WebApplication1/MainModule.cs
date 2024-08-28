@@ -1,4 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
 using Volo.Abp;
@@ -19,14 +22,31 @@ namespace WebApplication1
         typeof(AbpAutofacModule),                                                  
         typeof(OwApplicationModule),
         typeof(OwEfCoreModule))]
-    public class MainModule : AbpModule
+    public class MainModule() : AbpModule
     {
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             base.ConfigureServices(context);
 
-            //ConfigureAuthentication(context);
+            context.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "zbj",
+                    ValidAudience = "ZBJ",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("{19B2CAF7-095D-44E9-A45D-C8A8F5C16414}"))
+                };
+            });
+
             context.Services.AddControllers();
             context.Services.AddEndpointsApiExplorer();
             context.Services.AddAbpSwaggerGen(opt =>
