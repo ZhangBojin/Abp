@@ -10,14 +10,15 @@ namespace Ow.Application.Service.LoginServer
     {
 
         [AllowAnonymous]
-        public  Task Login1(UserLoginDto userLoginDto)
+        public async Task Login1(UserLoginDto userLoginDto)
         {
-            //var result = await signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, true);
-            //if (result.Succeeded)
-            //{
+            var result = await signInManager.PasswordSignInAsync(userLoginDto.UserName, userLoginDto.Password, false, true);
+            if (result.Succeeded)
+            {
 
-            //}
-            return Task.CompletedTask;
+            }
+
+            return;
         }
 
         [Authorize(Roles = "admin")]

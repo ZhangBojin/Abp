@@ -51,6 +51,7 @@ namespace WebApplication1.OwAuthorization
             _context.Response.StatusCode = StatusCodes.Status403Forbidden;
             return Task.CompletedTask;
         }
+
     }
 
 

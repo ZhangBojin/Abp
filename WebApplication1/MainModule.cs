@@ -30,24 +30,6 @@ namespace WebApplication1
         {
             base.ConfigureServices(context);
 
-            //context.Services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(options =>
-            //{
-            //    options.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        ValidIssuer = "zbj",
-            //        ValidAudience = "ZBJ",
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("{19B2CAF7-095D-44E9-A45D-C8A8F5C16414}"))
-            //    };
-            //});
-
             context.Services.AddAuthentication(option =>
             {
                 option.AddScheme<AuthenticationHandler>(SchemeDefault.Scheme, "Ow_Scheme");
