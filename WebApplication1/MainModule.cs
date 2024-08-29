@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
 using Volo.Abp;
