@@ -7,7 +7,6 @@ namespace WebApplication1.OwAuthorization
 {
     public class AuthenticationHandler(IConfiguration configuration) : IAuthenticationHandler
     {
-        private readonly IConfiguration _configuration = configuration;
 
         private Microsoft.AspNetCore.Http.HttpContext _context = null!;
         private AuthenticationScheme? _scheme;
@@ -23,7 +22,7 @@ namespace WebApplication1.OwAuthorization
         {
             var token = _context.Request.Headers.Authorization;
             if(token == StringValues.Empty)  return Task.FromResult<AuthenticateResult>(AuthenticateResult.Fail("Token is missing"));
-            var data = new JwtHelper(_configuration).DecodeJwtToken(token!);
+            var data = new JwtHelper(configuration).DecodeJwtToken(token!);
 
             var claim = new ClaimsIdentity();
             claim.AddClaim(new Claim(ClaimTypes.Name, data.FindFirst(ClaimTypes.Name)!.Value));
