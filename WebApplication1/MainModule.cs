@@ -1,6 +1,4 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Ow.Application;
 using Ow.EntityFrameworkCore;
@@ -13,6 +11,7 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using WebApplication1.OwAuthorization;
+
 
 namespace WebApplication1
 {
@@ -30,6 +29,20 @@ namespace WebApplication1
         {
             base.ConfigureServices(context);
 
+            //配置 ASP.NET Core 的身份验证服务
+            context.Services.AddIdentity<Volo.Abp.Identity.IdentityUser, Volo.Abp.Identity.IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.User.RequireUniqueEmail = true;
+            });
+
+            //配置了 ASP.NET Core 应用程序的身份验证方案
             context.Services.AddAuthentication(option =>
             {
                 option.AddScheme<AuthenticationHandler>(SchemeDefault.Scheme, "Ow_Scheme");
