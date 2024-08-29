@@ -45,13 +45,13 @@ namespace WebApplication1
             //配置了 ASP.NET Core 应用程序的身份验证方案
             context.Services.AddAuthentication(option =>
             {
-                option.AddScheme<AuthenticationHandler>(SchemeDefault.Scheme, "Ow_Scheme");
-                option.DefaultAuthenticateScheme = SchemeDefault.Scheme;
-                option.DefaultChallengeScheme= SchemeDefault.Scheme;
-                option.DefaultForbidScheme = SchemeDefault.Scheme;
-                option.DefaultScheme= SchemeDefault.Scheme;
-                option.DefaultSignInScheme= SchemeDefault.Scheme;
-                option.DefaultSignOutScheme= SchemeDefault.Scheme;
+                option.AddScheme<AuthenticationHandler>(AuthenticationHandler.SchemeDefault.Scheme, "Ow_Scheme");
+                option.DefaultAuthenticateScheme = AuthenticationHandler.SchemeDefault.Scheme;
+                option.DefaultChallengeScheme= AuthenticationHandler.SchemeDefault.Scheme;
+                option.DefaultForbidScheme = AuthenticationHandler.SchemeDefault.Scheme;
+                option.DefaultScheme= AuthenticationHandler.SchemeDefault.Scheme;
+                option.DefaultSignInScheme= AuthenticationHandler.SchemeDefault.Scheme;
+                option.DefaultSignOutScheme= AuthenticationHandler.SchemeDefault.Scheme;
             });
 
             context.Services.AddControllers();

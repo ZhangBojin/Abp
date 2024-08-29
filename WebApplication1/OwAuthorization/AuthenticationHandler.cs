@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using Microsoft.Extensions.Primitives;
+using Ow.Application.Helper;
 
 namespace WebApplication1.OwAuthorization
 {
-    public class AuthenticationHandler : IAuthenticationHandler
+    public class AuthenticationHandler(IConfiguration configuration) : IAuthenticationHandler
     {
+        private readonly IConfiguration _configuration = configuration;
+
         private Microsoft.AspNetCore.Http.HttpContext _context = null!;
         private AuthenticationScheme? _scheme;
+
         public Task InitializeAsync(AuthenticationScheme scheme, HttpContext context)
         {
             _context = context;
@@ -16,19 +21,20 @@ namespace WebApplication1.OwAuthorization
 
         public Task<AuthenticateResult> AuthenticateAsync()
         {
-            var a = _context.Request.Body;
-            var b= _context.Request.Headers.Authorization;
-            if (b == "222222")
-            {
-                var claim = new ClaimsIdentity("Custom");
-                claim.AddClaim(new Claim(ClaimTypes.Name,"zbj"));
-                claim.AddClaim(new Claim(ClaimTypes.Role,"admin"));
-                ClaimsPrincipal principal = new ClaimsPrincipal(claim);
-                return Task.FromResult<AuthenticateResult>(AuthenticateResult.Success(new AuthenticationTicket(principal, SchemeDefault.Scheme)));
-            }
+            var token = _context.Request.Headers.Authorization;
+            if(token == StringValues.Empty)  return Task.FromResult<AuthenticateResult>(AuthenticateResult.Fail("Token is missing"));
+            var data = new JwtHelper(_configuration).DecodeJwtToken(token!);
 
-            return Task.FromResult<AuthenticateResult>(AuthenticateResult.Fail("失败"));
+            var claim = new ClaimsIdentity();
+            claim.AddClaim(new Claim(ClaimTypes.Name, data.FindFirst(ClaimTypes.Name)!.Value));
+            claim.AddClaim(new Claim(ClaimTypes.Role, data.FindFirst(ClaimTypes.Role)!.Value));
+            claim.AddClaim(new Claim(ClaimTypes.Email, data.FindFirst(ClaimTypes.Email)!.Value));
+            var principal = new ClaimsPrincipal(claim);
+            return Task.FromResult<AuthenticateResult>(
+                AuthenticateResult.Success(new AuthenticationTicket(principal, SchemeDefault.Scheme)));
+
         }
+
         /// <summary>
         /// 没登陆
         /// </summary>
@@ -40,6 +46,7 @@ namespace WebApplication1.OwAuthorization
             _context.Response.StatusCode = StatusCodes.Status401Unauthorized;
             return Task.CompletedTask;
         }
+
         /// <summary>
         /// 没权限
         /// </summary>
@@ -52,12 +59,11 @@ namespace WebApplication1.OwAuthorization
             return Task.CompletedTask;
         }
 
+
+        public class SchemeDefault
+        {
+            public const string Scheme = "Ow";
+        }
+
     }
-
-
-    public class SchemeDefault
-    {
-        public const string Scheme = "Ow";
-    }
-
 }
