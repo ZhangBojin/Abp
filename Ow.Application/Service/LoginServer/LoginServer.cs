@@ -25,12 +25,6 @@ namespace Ow.Application.Service.LoginServer
             return token;
         }
 
-        [Authorize(Roles = "SuperAdministrator")]
-        public async void Login2()
-        {
-            return;
-        }
-
     }
 
 }
