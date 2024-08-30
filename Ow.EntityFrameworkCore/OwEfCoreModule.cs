@@ -1,13 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Ow.Domain;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.Identity;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 
 namespace Ow.EntityFrameworkCore
 {
     [DependsOn(typeof(OwDomainModule),
+        typeof(AbpPermissionManagementEntityFrameworkCoreModule),
+        typeof(AbpIdentityDomainModule),
+        typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpEntityFrameworkCoreModule))]
     public class OwEfCoreModule:AbpModule
     {
@@ -19,7 +23,7 @@ namespace Ow.EntityFrameworkCore
 
             }); //配置注入
             Configure<AbpDbContextOptions>(options => {
-                options.UseSqlServer(); //选择使用mysql数据库
+                options.UseSqlServer(); //选择使用SqlServer数据库
             });
         }
     }
