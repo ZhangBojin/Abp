@@ -21,7 +21,6 @@ namespace Ow.Application
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             base.ConfigureServices(context);
-            context.Services.AddTransient<SignInManager<IdentityUser>>();
         }
     }
 }
