@@ -19,7 +19,7 @@ namespace Ow.Application.Service.LoginServer
         public async Task<UserLoginResultDto> Login(UserLoginDto userLoginDto)
         {
             var user =await identityUserManager.FindByEmailAsync(userLoginDto.UserEmail);
-            if (user == null) return new UserLoginResultDto(200,"账户或密码错误！");
+            if (user == null) return new UserLoginResultDto(200,"未注册！");
             var role=await identityUserManager.GetRolesAsync(user!);
             var result = await signInManager.PasswordSignInAsync(user.UserName, userLoginDto.Password, false, true);
             if (!result.Succeeded) new UserLoginResultDto(200, "账户或密码错误！");
@@ -27,20 +27,22 @@ namespace Ow.Application.Service.LoginServer
             return new UserLoginResultDto(200, token); ;
         }
 
-        [Authorize(IdentityPermissions.Roles.Create)]
-        //[Authorize(Roles = "SuperAdministrator")]
-        public async Task CS()
-        {
-            var a4 = await repository.InsertAsync(
-                new PermissionGrant(
-                    GuidGenerator.Create(),
-                    IdentityPermissions.UserLookup.Default,
-                    "R",
-                    "SuperAdministrator",
-                    CurrentTenant.Id
-                ));
-            return;
-        }
+        #region 权限测试
+        //[Authorize(IdentityPermissions.Roles.Create)]
+        ////[Authorize(Roles = "SuperAdministrator")]
+        //public async Task CS()
+        //{
+        //    var a4 = await repository.InsertAsync(
+        //        new PermissionGrant(
+        //            GuidGenerator.Create(),
+        //            IdentityPermissions.UserLookup.Default,
+        //            "R",
+        //            "SuperAdministrator",
+        //            CurrentTenant.Id
+        //        ));
+        //    return;
+        //}
+        #endregion
     }
 
 }
