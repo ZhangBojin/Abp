@@ -16,15 +16,15 @@ namespace Ow.Application.Service.LoginServer
     {
 
         [AllowAnonymous]
-        public async Task<string> Login(UserLoginDto userLoginDto)
+        public async Task<UserLoginResultDto> Login(UserLoginDto userLoginDto)
         {
             var user =await identityUserManager.FindByEmailAsync(userLoginDto.UserEmail);
-            if (user == null) return "未找到该用户！";
+            if (user == null) return new UserLoginResultDto(200,"账户或密码错误！");
             var role=await identityUserManager.GetRolesAsync(user!);
             var result = await signInManager.PasswordSignInAsync(user.UserName, userLoginDto.Password, false, true);
-            if (!result.Succeeded) return "账户或密码错误！";
+            if (!result.Succeeded) new UserLoginResultDto(200, "账户或密码错误！");
             var token = new JwtHelper(iConfiguration).GenerateJwtToken(user.UserName, role[0],userLoginDto.UserEmail);
-            return token;
+            return new UserLoginResultDto(200, token); ;
         }
 
         [Authorize(IdentityPermissions.Roles.Create)]
